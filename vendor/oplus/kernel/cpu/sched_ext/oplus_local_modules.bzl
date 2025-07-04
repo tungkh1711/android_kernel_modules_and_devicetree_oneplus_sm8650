@@ -10,7 +10,27 @@ def define_oplus_local_modules():
             "main.c",
             "**/*.h",
         ]),
+        conditional_srcs = {
+            "CONFIG_HMBIRD_SCHED": {
+                True:  [
+                    "cpufreq_scx_main.c",
+                    "scx_shadow_tick.c",
+                    "hmbird_gki/scx_main.c",
+                    "hmbird_gki/scx_sched_gki.c",
+                    "hmbird_gki/scx_util_track.c",
+                ],
+            },
+        },
+        local_defines = [],
         includes = ["."],
+        ko_deps = [
+            "//vendor/oplus/kernel/synchronize:oplus_locking_strategy",
+            "//vendor/oplus/kernel/ipc:oplus_binder_strategy",
+        ],
+        header_deps = [
+            "//vendor/oplus/kernel/synchronize:config_headers",
+            "//vendor/oplus/kernel/ipc:config_headers",
+        ],
         copts = select({
             "//build/kernel/kleaf:kocov_is_true": ["-fprofile-arcs", "-ftest-coverage"],
             "//conditions:default": [],
