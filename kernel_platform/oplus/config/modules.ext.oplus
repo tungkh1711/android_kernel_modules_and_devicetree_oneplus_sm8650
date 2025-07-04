@@ -18,3 +18,4 @@
 ../vendor/oplus/kernel/mm
 ../vendor/oplus/kernel/synchronize
 ../vendor/oplus/kernel/cpu/midas
+../vendor/oplus/kernel/cpu/sched_ext
